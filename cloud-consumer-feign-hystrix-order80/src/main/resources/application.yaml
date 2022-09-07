@@ -1,0 +1,28 @@
+server:
+  port: 80
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka
+spring:
+  application:
+    name: consumer-openfeign-order
+#
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+
+#feign:
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 5000
+
+#        ReadTimeout: 5000
+#logging:
+#  level: debug
+feign:
+  hystrix:
+    enabled: true

@@ -1,0 +1,39 @@
+server:
+  port: 8801
+
+spring:
+  application:
+    name: cloud-stream-provider
+  cloud:
+    stream:
+      binders: #配置要绑定的rabbitmq的服务信息
+        defaultRabbit: #表示定义的名称，用于bingding的整合
+          type: rabbit
+          enviroment:
+            spring:
+              rabbitmq:
+                host: 119.91.26.214
+                port: 5672
+                username: admin
+                password: 123
+      bindings: #服务的整合处理
+        output:
+          destination: studentExchange #表示要使用的exchange的名称定义
+          content-type: application/json
+          binder: defaultRabbit
+  rabbitmq:
+    host: 119.91.26.214
+    port: 5672
+    username: admin
+    password: 123
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+  instance:
+    lease-expiration-duration-in-seconds: 5 #设置超过的时间间隔
+    lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔
+    instance-id: send-8801.com #信息列表显示主机名称
+    prefer-ip-address: true #访问路径变为ip地址
